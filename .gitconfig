@@ -1,0 +1,21 @@
+[user]
+	name = Joe Van Dyk
+	email = joevandyk@crowdcow.com
+[alias]
+	co = checkout
+	searchlog = "!f() { git --no-pager log --color-words --all --decorate --graph -i --grep \"$1\";  }; f"
+[push]
+	default = current
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[diff]
+	tool = diff
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential

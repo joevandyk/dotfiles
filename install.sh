@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Dotfiles install script — runs automatically in devcontainers
-# when VS Code/Cursor has dotfiles.repository configured.
+# Dotfiles install script
+# Usage: ./install.sh
+# Also runs automatically in devcontainers when VS Code/Cursor
+# has dotfiles.repository configured.
+
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Install zsh if not present
 if ! command -v zsh >/dev/null 2>&1; then
@@ -18,12 +22,20 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-# Link dotfiles
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-
-for file in .zshrc .gitconfig; do
+# Symlink dotfiles
+for file in .zshrc .zshenv .gitconfig .tmux.conf .tool-versions; do
   if [ -f "$DOTFILES_DIR/$file" ]; then
     ln -sf "$DOTFILES_DIR/$file" "$HOME/$file"
+    echo "[dotfiles] linked $file"
+  fi
+done
+
+# Symlink Claude config files
+mkdir -p "$HOME/.claude"
+for file in settings.json .mcp.json CLAUDE.md; do
+  if [ -f "$DOTFILES_DIR/.claude/$file" ]; then
+    ln -sf "$DOTFILES_DIR/.claude/$file" "$HOME/.claude/$file"
+    echo "[dotfiles] linked .claude/$file"
   fi
 done
 
