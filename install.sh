@@ -23,7 +23,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 fi
 
 # Symlink dotfiles
-for file in .zshrc .zshenv .gitconfig .tmux.conf .tool-versions; do
+for file in .zshrc .zshenv .gitconfig .tmux.conf; do
   if [ -f "$DOTFILES_DIR/$file" ]; then
     ln -sf "$DOTFILES_DIR/$file" "$HOME/$file"
     echo "[dotfiles] linked $file"
