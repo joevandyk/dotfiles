@@ -21,7 +21,7 @@ export GPG_TTY=$(tty)
 
 source ~/.zshenv
 
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="$HOME/.local/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Elixir/Erlang
 export ERL_AFLAGS="-kernel shell_history enabled"

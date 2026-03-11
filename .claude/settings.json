@@ -5,5 +5,12 @@
     "defaultMode": "bypassPermissions"
   },
   "model": "opus",
-  "skipDangerousModePermissionPrompt": true
+  "statusLine": {
+    "type": "command",
+    "command": "sh /Users/joe/.claude/statusline-command.sh"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "enabledPlugins": {
+    "ruby-lsp@claude-plugins-official": true
+  }
 }
